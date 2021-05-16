@@ -29,7 +29,7 @@ class XafeDialogScaffold extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(
-              scaler.fontSizer.sp(50),
+              scaler.fontSizer.sp(50.0),
             ),
           ),
           child: SingleChildScrollView(

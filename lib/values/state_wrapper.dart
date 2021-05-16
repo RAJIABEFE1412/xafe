@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:xafe/state/auth_state.dart';
+import 'package:xafe/state/dashboard_state.dart';
 import 'package:xafe/utils/scroll_behaviour.dart';
 
 class StateWrapper extends StatelessWidget {
@@ -18,10 +19,10 @@ class StateWrapper extends StatelessWidget {
           create: (_) => AuthState.instance,
           lazy: true,
         ),
-        // ChangeNotifierProvider(
-        //   create: (_) => DashboardState.instance,
-        //   lazy: true,
-        // ),
+        ChangeNotifierProvider(
+          create: (_) => DashboardState.instance,
+          lazy: true,
+        ),
         // ChangeNotifierProvider(
         //   create: (_) => ProfileState.instance,
         //   lazy: true,

@@ -85,10 +85,10 @@ String parseSuccess(dynamic data, String defaultMessage) {
       : "Success";
   try {
     if (data is Map) {
-      if (data["message"] != null &&
-          data["message"] is String &&
-          data["message"].isNotEmpty) {
-        return data["message"];
+      if (data['message'] != null &&
+          data['message'] is String &&
+          (data['message'].isNotEmpty)) {
+        return data['message'];
       }
       return fallbackMessage;
     }

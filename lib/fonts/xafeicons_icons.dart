@@ -24,4 +24,5 @@ class XafeIcons {
   static const IconData budget = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData home = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData eye = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData pecncil = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

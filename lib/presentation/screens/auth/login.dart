@@ -69,7 +69,7 @@ class LoginPage extends StatelessWidget {
           );
           if (doRoute != null && doRoute.response == AuthEnum.Successful) {
             log('oga 000');
-            Navigator.of(context).pushNamed(XafeRoutes.dashboard);
+            Navigator.of(context).pushNamedAndRemoveUntil(XafeRoutes.dashboard, (Route<dynamic> route)=> false);
           } else {
             log("daa --- ${doRoute.response}");
           }

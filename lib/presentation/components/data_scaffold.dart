@@ -8,24 +8,28 @@ import 'package:xafe/utils/extensions.dart';
 
 import 'form_button.dart';
 
-class FormScaffold extends StatefulWidget {
+class DataScaffold extends StatefulWidget {
   final List<Widget> fields;
-  final String title;
+  final Widget title;
+  final Widget leading;
   final String subTitle;
   final String btnText;
   final TextAlign titleAlignment;
   final OnPressed onSubmit;
+  final bool isExpanded;
   final OnPressed onBack;
   final Color backgroundColor;
   final bool hideBtn;
   final bool _titleInAppBar;
 
-  FormScaffold({
+  DataScaffold({
     @required this.fields,
     @required this.title,
     this.btnText,
-    this.onSubmit,this.backgroundColor,
+    this.onSubmit,
+    this.backgroundColor,
     this.onBack,
+    this.leading,this.isExpanded = false,
     this.subTitle,
     this.titleAlignment = TextAlign.center,
     this.hideBtn = false,
@@ -33,12 +37,14 @@ class FormScaffold extends StatefulWidget {
         assert(title != null),
         _titleInAppBar = false;
 
-  FormScaffold.withAppbar({
+  DataScaffold.withAppbar({
     @required this.fields,
     @required this.title,
     this.btnText,
     this.onSubmit,
-    this.onBack,this.backgroundColor,
+    this.onBack,this.isExpanded = false,
+    this.leading,
+    this.backgroundColor,
     this.subTitle,
     this.titleAlignment = TextAlign.center,
     this.hideBtn = false,
@@ -47,10 +53,10 @@ class FormScaffold extends StatefulWidget {
         _titleInAppBar = true;
 
   @override
-  State<StatefulWidget> createState() => _FormScaffoldState();
+  State<StatefulWidget> createState() => _DataScaffoldState();
 }
 
-class _FormScaffoldState extends State<FormScaffold> {
+class _DataScaffoldState extends State<DataScaffold> {
   final GlobalKey<FormState> formKey = GlobalKey();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
@@ -64,7 +70,8 @@ class _FormScaffoldState extends State<FormScaffold> {
     final scaler = context.scaler;
     return GestureDetector(
       child: Scaffold(
-        key: scaffoldKey,backgroundColor: widget.backgroundColor,
+        key: scaffoldKey,
+        backgroundColor: widget.backgroundColor,
         body: Form(
           key: formKey,
           child: CustomScrollView(
@@ -72,21 +79,11 @@ class _FormScaffoldState extends State<FormScaffold> {
               SliverAppBar(
                 pinned: widget._titleInAppBar,
                 floating: true,
-                centerTitle: true,
+                centerTitle: false,
                 elevation: 0,
-                leading: widget.onBack != null
-                    ? IconButton(
-                        icon: Icon(Icons.arrow_back_ios_outlined),
-                        onPressed: widget.onBack)
-                    : null,
-                title: (widget._titleInAppBar)
-                    ? XafeText(
-                        widget.title,
-                        textAlign: widget.titleAlignment,
-                        style: XafeTextStyle.bold.copyWith(
-                            fontSize: 44, color: XafeColors.background),
-                      )
-                    : null,
+                backgroundColor: widget.backgroundColor,
+                leading: widget.leading,
+                title: (widget._titleInAppBar) ? widget.title : null,
               ),
               SliverPadding(
                 padding: scaler.insets.symmetric(
@@ -96,12 +93,7 @@ class _FormScaffoldState extends State<FormScaffold> {
                   delegate: SliverChildListDelegate(
                     [
                       XafeSizedBox(height: 1),
-                      if (!widget._titleInAppBar)
-                        XafeText(
-                          widget.title,
-                          textAlign: widget.titleAlignment,
-                          style: XafeTextStyle.bold.copyWith(fontSize: 65),
-                        ),
+                      if (!widget._titleInAppBar) widget.title,
                       if (widget.subTitle != null) XafeSizedBox(height: 1),
                       if (widget.subTitle != null)
                         XafeText(
@@ -115,7 +107,7 @@ class _FormScaffoldState extends State<FormScaffold> {
               ),
               SliverPadding(
                 padding: scaler.insets.symmetric(
-                  horizontal: 5,
+                  horizontal: widget.isExpanded ? 0 :5,
                   vertical: 3,
                 ),
                 sliver: SliverList(

@@ -109,7 +109,7 @@ class EmailPage extends StatelessWidget {
                 );
                 if (doRoute != null &&
                     doRoute.response == AuthEnum.Successful) {
-                  Navigator.of(context).pushNamed(XafeRoutes.dashboard);
+                  Navigator.of(context).pushNamedAndRemoveUntil(XafeRoutes.dashboard, (Route<dynamic> route)=> false);
                 } else {
                   log("error _ ${doRoute.response}");
                 }

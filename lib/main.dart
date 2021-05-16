@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:xafe/presentation/screens/launch_screen.dart';
 import 'package:xafe/styles/themedata.dart';
 import 'package:xafe/values/routes.dart';
 import 'package:xafe/values/state_wrapper.dart';
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
         theme: XafeThemes.defaultTheme,
         routes: XafeRoutes.staticRoutes,
         onGenerateRoute: XafeRoutes.dynamicRoutes,
-        home: XafeRoutes.home,
+        home: XafeRoutes.launch,
       ),
     );
   }
